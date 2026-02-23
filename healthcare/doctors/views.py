@@ -9,11 +9,9 @@ class DoctorListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        # sirf logged-in user ke doctors
         return Doctor.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
-        # doctor ka owner logged-in user hoga
         serializer.save(user=self.request.user)
 
 
@@ -22,5 +20,4 @@ class DoctorDetailView(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        # user sirf apna doctor hi access kare
         return Doctor.objects.filter(user=self.request.user)

@@ -8,7 +8,6 @@ class PatientListCreateView(generics.ListCreateAPIView):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        # sirf current user ke patients
         return Patient.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
